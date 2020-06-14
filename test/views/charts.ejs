@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Catchio application for AL police departement fuck you </title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <!-- Google fonts - Popppins for copy-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,800">
+    <!-- orion icons-->
+    <link rel="stylesheet" href="css/orionicons.css">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="css/custom.css">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="img/favicon.png?3">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+  
+  
+      </head>
+
+  <body>
+    <header class="header">
+      <nav class="navbar navbar-expand-lg px-4 py-2 bg-white shadow"><a href="#" class="sidebar-toggler text-gray-500 mr-4 mr-lg-5 lead"><i class="fas fa-align-left"></i></a><a href="#" class="navbar-brand font-weight-bold text-uppercase text-base">Catchio Dashboard</a>
+        <ul class="ml-auto d-flex align-items-center list-unstyled mb-0">
+          <li class="nav-item">
+            <form id="searchForm" class="ml-auto d-none d-lg-block">
+              <div class="form-group position-relative mb-0">
+                <button type="submit" style="top: -3px; left: 0;" class="position-absolute bg-white border-0 p-0"><i class="o-search-magnify-1 text-gray text-lg"></i></button>
+                <input type="search" placeholder="Search ..." class="form-control form-control-sm border-0 no-shadow pl-4">
+              </div>
+            </form>
+            <li class="nav-item dropdown ml-auto"><a id="userInfo" href="http://example.com" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><img src="img/avatar-6.jpg" alt="Jason Doe" style="max-width: 2.5rem;" class="img-fluid rounded-circle shadow"></a>
+            <div aria-labelledby="userInfo" class="dropdown-menu"><a href="#" class="dropdown-item"><strong class="d-block text-uppercase headings-font-family"><%=d['user_name']%></strong>
+              
+              <div class="dropdown-divider"></div><a href="../logout" class="dropdown-item">Logout</a>
+            </div>
+          </li>
+          </li>
+        </ul>
+      </nav>
+       <div>
+        <td><p id='num' hidden><%=d['number']%></p></td>
+        <td><p id='year_Reported' hidden><%=d['year_Reported']%></p></td>
+        <td><p id='count' hidden><%=d['countC']%></p></td>
+        <td><p id='Crime_code' hidden><%=d['Crime_code']%></p></td>
+        <td><p id='countage' hidden><%=d['countage']%></p></td>
+        <td><p id='victim_age' hidden><%=d['victim_age']%></p></td>
+ 
+    </div>
+    </header>
+
+    <!-- navbar-->
+   
+    <div class="d-flex align-items-stretch">
+      <div id="sidebar" class="sidebar py-3">
+        <div class="text-gray-400 text-uppercase px-3 px-lg-4 py-4 font-weight-bold small headings-font-family">MAIN</div>
+        <ul class="sidebar-menu list-unstyled">
+              <li class="sidebar-list-item"><a href="/prediction" class="sidebar-link text-muted"><i class="o-sales-up-1 mr-3 text-gray"></i><span>Predictions</span></a></li>
+              <li class="sidebar-list-item"><a href="/maps" class="sidebar-link text-muted"><i class="o-paperwork-1 mr-3 text-gray"></i><span>Maps</span></a></li>
+              <li class="sidebar-list-item"><a href="/charts" class="sidebar-link text-muted active"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Charts</span></a></li>
+              <li class="sidebar-list-item"><a href="/reports" class="sidebar-link text-muted "><i class="o-table-content-1 mr-3 text-gray"></i><span>All Reports</span></a></li>
+              <li class="sidebar-list-item"><a href="/" class="sidebar-link text-muted"><i class="o-survey-1 mr-3 text-gray"></i><span>Add Report</span></a></li>
+        </ul>
+        
+      </div>
+
+
+<!--Charts-->
+
+  <div class="col-lg-16 mb-4 mb-lg-0">
+    <div class="card">
+      <div class="card-header">
+        <h2 class="h6 text-uppercase mb-0">NUMBER OF CRIME PER YEAR</h2>
+      </div>
+      <div class="card-body">
+        <div class="chart-holder mt-5 mb-5">
+          <canvas id="lineChart" width="50"></canvas>
+            
+            <script type="text/javascript">
+                var numbers =new Array();
+                var year_Reported=new Array();
+                num=document.getElementById('num').innerHTML.split(",");
+                yr=document.getElementById('year_Reported').innerHTML.split(",");
+                num.forEach(n=>numbers.push(Number(n)));
+                yr.forEach(y=>year_Reported.push(y.toString()));
+                // alert(year_Reported.length);
+                // alert(numbers.length);
+
+              
+                var ctx = document.getElementById('lineChart').getContext('2d');
+                var chart = new Chart(ctx, {
+                                // The type of chart we want to create
+                                type: 'line',
+                            
+                                // The data for our dataset
+                                data: {
+                                labels: year_Reported,
+                                // ,'2011','2012','2013','2014']
+                                // labels:[yr],
+                                datasets: [{
+                                    label: 'Count of Crime',
+                                    backgroundColor: 'rgb(100,0,255)',
+                                    // borderColor: 'rgb(255, 99, 132)',
+                                    data: numbers
+                                    // data: [num]
+                          
+                                }]
+                            },
+                                // Configuration options go here
+                                options: {}
+                            });
+                          </script>  
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <h2 class="h6 text-uppercase mb-0">COUNT OF CRIME BY CRIME</h2>
+      </div>
+      <div class="card-body">
+        <div class="chart-holder mt-500000 mb-500000">
+          <canvas id="pieChart" width="1200" ></canvas>
+          <script type="text/javascript" scr="chats.js">
+            var count =new Array();
+            var crime_code=new Array();
+                cc=document.getElementById('count').innerHTML.split(",");
+                numCC=document.getElementById('Crime_code').innerHTML.split(",");
+                cc.forEach(n=>count.push(Number(n)));
+                numCC.forEach(y=>crime_code.push(y));
+                var ctx = document.getElementById('pieChart').getContext('2d');
+                // var fillPattern = ctx.createPattern(img, 'repeat')
+                const color=(n)=>{return 'rgb('+n*5+', 99, 132)'}
+                const colors=new Array();
+                for(i=0;i<1000;i++){
+                  colors.push(color(i))
+                }
+                var chart = new Chart(ctx, {
+                                // The type of chart we want to create
+                                type: 'doughnut',
+                            
+                                // The data for our dataset
+                                data: {
+                                labels: crime_code,
+                                // labels:[yr],
+                                datasets: [{
+                                    label: 'Count of Crime by Crime Code',
+                                    backgroundColor: colors,
+                                    // borderColor: 'rgb(255, 99, 132)',
+                                    data: count
+                                    // data: [num]
+                          
+                                }]
+                            },
+                                // Configuration options go here
+                                options: {}
+                            });
+                          </script>  
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <h2 class="h6 text-uppercase mb-0">COUNT OF CRIME BY VICTIM AGE </h2>
+      </div>
+      <div class="card-body">
+        <div class="chart-holder mt-500000 mb-500000">
+          <canvas id="barChart" width="1080" ></canvas>
+          <script type="text/javascript" scr="chats.js">
+            var countage =new Array();
+            var victim_age=new Array();
+                agecc=document.getElementById('countage').innerHTML.split(",");
+                vage=document.getElementById('victim_age').innerHTML.split(",");
+                agecc.forEach(n=>countage.push(Number(n)));
+                vage.forEach(y=>victim_age.push(Number(y).toString()));
+                var ctx = document.getElementById('barChart').getContext('2d');
+                // var fillPattern = ctx.createPattern(img, 'repeat')
+                // const color=(n)=>{return 'rgb('+n*5+', 99, 132)'}
+                // const colors=new Array();
+                // for(i=0;i<1000;i++){
+                //   colors.push(color(i))
+                // }
+                var chart = new Chart(ctx, {
+                                // The type of chart we want to create
+                                type: 'bar',
+                            
+                                // The data for our dataset
+                                data: {
+                                labels: victim_age,
+                                // labels:[yr],
+                                datasets: [{
+                                    label: 'Count of Crime by Victim Age',
+                                    backgroundColor: colors,
+                                    // borderColor: 'rgb(255, 99, 132)',
+                                    data: countage
+                                    // data: [num]
+                          
+                                }]
+                            },
+                                // Configuration options go here
+                                options: {}
+                            });
+                          </script>  
+        </div>
+      </div>
+    </div>
+
+  </div>
+  
+   <!-- <tbody>
+    <% if (typeof(result) !== 'undefined') {
+   result.forEach(function(item){  %>
+   <tr>
+     <td><%=item.year_Reported%></td>
+     <td><%=item.number%></td>
+    </tr>
+     <%});
+    }%>
+</tbody>  -->
+<!--Charts-->
+</div>
+ </div>
+    </div>
+<footer class="footer bg-white shadow align-self-end py-3 px-xl-5 w-100">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-6 text-center text-md-left text-primary">
+                <p class="mb-2 mb-md-0">AyoubBouz&HafsaTaofiq 2019-2020</p>
+              </div>
+              
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+  <!-- JavaScript files-->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/popper.js/umd/popper.min.js"> </script>
+  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+  <script src="vendor/jquery.cookie/jquery.cookie.js"> </script>
+  <script src="vendor/chart.js/Chart.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+  <script src="js/front.js"></script>
+  <script src="chart.js"></script>
+
+  
+</body>
+</html>

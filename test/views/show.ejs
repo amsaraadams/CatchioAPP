@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    
+<style>
+/* Set the size of the div element that contains the map */
+#map {
+  height: 400px;  /* The height is 400 pixels */
+  width: 100%;  /* The width is the width of the web page */
+ }
+</style>
+
+    <!--Load the API from the specified URL
+    * The async attribute allows the browser to render the page while the API loads
+    * The key parameter will contain your own API key (which is not needed for this tutorial)
+    * The callback parameter executes the initMap() function
+    -->
+    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Catchio application for LA Police departement</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <!-- Google fonts - Popppins for copy-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,800">
+    <!-- orion icons-->
+    <link rel="stylesheet" href="../css/orionicons.css">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="../css/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="../css.custom.css">
+        <link rel="shortcut icon" href="img/favicon.png?3">
+
+    <!-- Favicon-->
+    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+  </head>
+  <body>
+                    <script>
+                          $(document).ready(function(){
+                            $("#btn-submit").submit(function(){
+                              alert("Form submitted");
+                          });
+                        });
+                          </script>
+    <!-- navbar-->
+   <header class="header">
+      <nav class="navbar navbar-expand-lg px-4 py-2 bg-white shadow"><a href="#" class="sidebar-toggler text-gray-500 mr-4 mr-lg-5 lead"><i class="fas fa-align-left"></i></a><a href="#" class="navbar-brand font-weight-bold text-uppercase text-base">Catchio Dashboard</a>
+        <ul class="ml-auto d-flex align-items-center list-unstyled mb-0">
+          <li class="nav-item">
+            <form id="searchForm" class="ml-auto d-none d-lg-block">
+              <div class="form-group position-relative mb-0">
+                <button type="submit" style="top: -3px; left: 0;" class="position-absolute bg-white border-0 p-0"><i class="o-search-magnify-1 text-gray text-lg"></i></button>
+                <input type="search" placeholder="Search ..." class="form-control form-control-sm border-0 no-shadow pl-4">
+              </div>
+            </form>
+            <li class="nav-item dropdown ml-auto"><a id="userInfo" href="http://example.com" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><img src="img/avatar-6.jpg" alt="" style="max-width: 2.5rem;" class="img-fluid rounded-circle shadow"></a>
+            <div aria-labelledby="userInfo" class="dropdown-menu"><a href="#" class="dropdown-item"><strong class="d-block text-uppercase headings-font-family"><%=user_name%></strong>
+              
+              <div class="dropdown-divider"></div><a href="../logout" class="dropdown-item">Logout</a>
+            </div>
+          </li>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <div class="d-flex align-items-stretch">
+      <div id="sidebar" class="sidebar py-3">
+        <div class="text-gray-400 text-uppercase px-3 px-lg-4 py-4 font-weight-bold small headings-font-family">MAIN</div>
+        <ul class="sidebar-menu list-unstyled">
+              <li class="sidebar-list-item"><a href="/prediction" class="sidebar-link text-muted"><i class="o-sales-up-1 mr-3 text-gray"></i><span>Predictions</span></a></li>
+              <li class="sidebar-list-item"><a href="/maps" class="sidebar-link text-muted"><i class="o-paperwork-1 mr-3 text-gray"></i><span>Maps</span></a></li>
+              <li class="sidebar-list-item"><a href="/charts" class="sidebar-link text-muted"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Charts</span></a></li>
+              <li class="sidebar-list-item"><a href="/reports" class="sidebar-link text-muted"><i class="o-table-content-1 mr-3 text-gray"></i><span>All Reports</span></a></li>
+              <li class="sidebar-list-item"><a href="/" class="sidebar-link text-muted"><i class="o-survey-1 mr-3 text-gray"></i><span>Add Report</span></a></li>
+         
+        </ul>
+      </div>
+      <div class="page-holder w-100 d-flex flex-wrap">
+        <div class="container-fluid px-xl-5">
+          <section class="py-5">
+            <div class="row">
+              <!-- Basic Form-->
+              
+              <!-- Horizontal Form-->
+              
+              <!-- Inline Form-->
+              
+              <!-- Modal Form-->
+              
+              <!-- Form Elements -->
+             
+
+             <form id="form_Create" method="get" action="/reports" id="category-form">
+              <div class="col-lg-12 mb-5">
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="h6 text-uppercase mb-0">Show Report N <%=id[0].DR_Number%> </h3>
+                  </div>
+                  <div class="card-body">
+                    <form class="form-horizontal">
+                      <div class="form-group row">
+                        <label class="col-md-3 form-control-label">DR_Number</label>
+                        <div class="col-md-9">
+                          <input type="number" readonly="true" name="DR_Number" value="<%=id[0].DR_Number%>" class="form-control">
+                        </div>
+                      </div>
+                      <div class="line"></div>
+                      <div class="form-group row">
+                        <label class="col-md-3 form-control-label">Date_Reported</label>
+                        <div class="col-md-9">
+
+                          <input type="date"  readonly="true" value="<%=new Date(id[0].Date_Reported).toISOString().slice(0,10)%>" class="form-control" name="Date_Reported">
+                        </div>
+                      </div>
+                      <div class="line"></div>
+                      <div class="form-group row">
+                        <label class="col-md-3 form-control-label">Date_Occurred</label>
+                        <div class="col-md-9">
+                          <input type="date"  readonly="true" value="<%=new Date(id[0].Date_Reported).toISOString().slice(0,10)%>" name="Date_Occurred" class="form-control">
+                        </div>
+                      </div>
+                      <div class="line"></div>
+                      <div class="form-group row">
+                        <label class="col-md-3 form-control-label">Time_Occurred</label>
+                        <div class="col-md-4">
+                          <input type="number" readonly="true" value="<%=id[0].Time_Occurred%>" name="Time_Occurred" class="form-control"> <br>
+
+                        </div>
+                      </div>
+                      <div class="line"></div>
+                       <div class="form-group row">
+                        <label class="col-md-3 form-control-label">Victim age</label>
+                        <div class="col-md-4">
+                          <input type="number" readonly="true" value="<%=id[0].Victim_Age%>" name="Victim_age"  class="form-control"> <br>
+                        </div>
+                      </div>
+                       <div class="line"></div>
+                    <div class="form-group row">
+                        <label class="col-md-3 form-control-label">Victim_Sex <br><small class="text-primary"></small></label>
+                        <div class="col-md-9">
+                          <input type="text" readonly="true" value="<%=id[0].valeur%>" name="Victim_age"  class="form-control"> <br>
+                        </div>
+                      </div>
+                      <div class="line"></div>
+                      <div class="form-group row">
+                        <label class="col-md-3 form-control-label"> the status</label>
+                        <div class="col-md-9">
+                          <input type="text" name="Date_Occurred" class="form-control" readonly="true" value="<%=id[0].Status_Description%>">
+                        </div>
+                      </div>
+                      <div class="line"></div>
+                      <div class="form-group row">
+                        <label class="col-md-3 form-control-label"> the type of crime</label>
+                        <div class="col-md-9 ">
+                          <input type="text" name="Date_Occurred" class="form-control" readonly="true" value="<%=id[0].Crime_Code_Description%>">
+                        </div>
+                      </div>
+                      <div class="line"></div>
+                       <div class="form-group row">
+                        <label class="col-md-3 form-control-label"> the weapon used </label>
+                        <div class="col-md-9 ">
+                         <input type="text" name="Date_Occurred" class="form-control" readonly="true" value="<%=id[0].Weapon_Description%>">
+                        </div>
+                      </div>
+                      <div class="line"></div>
+                      <div class="form-group row">
+                        <label class="col-md-3 form-control-label"> the Premise</label>
+                        <div class="col-md-9 ">
+                          <input type="text" name="Date_Occurred" class="form-control" readonly="true" value="<%=id[0].Premise_Description%>">
+                        </div>
+                      </div>
+                      <div class="line"></div>
+                        <div class="form-group row">
+                        <label class="col-md-3 form-control-label">the coordinate of the location of the crime  </label>
+                         <div class="col-md-4">
+                           <input type=number step=0.001 name="lat"  value="<%=id[0].lat%>" placeholder="2,38787"class="form-control" readonly="true">
+                        </div>
+                        <div class="col-md-4">
+
+                           <input type=number step=0.001 name="lng" value="<%=id[0].lng%>" placeholder="103,3967"class="form-control" readonly="true">
+                        </div>
+                      </div>
+                      <div class="line"></div>
+                      <div class="form-group row">
+                        <label class="col-md-3 form-control-label"> the Area</label>
+                        <div class="col-md-9 ">
+                          <input type="text" name="Date_Occurred" class="form-control" readonly="true" value="<%=id[0].Area_Name%>">
+                        </div>
+                      </div>
+                      <div class="line"></div>
+                      <div class="form-group row">
+                        <div class="col-md-9 ml-auto">
+                          
+                          <button type="submit" class="btn btn-primary"  id="btn-submit">Back to List</button>
+                          <button type="submit" class="btn btn-primary"  id="btn-submit">Print the Report</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </form>
+            </div>
+          </section>
+        </div>
+        <footer class="footer bg-white shadow align-self-end py-3 px-xl-5 w-100">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-6 text-center text-md-left text-primary">
+                <p class="mb-2 mb-md-0">Ayoub Bouz and Taoufiq Hafsa  &copy; 2019-2020</p>
+              </div>
+              <div class="col-md-6 text-center text-md-right text-gray-400">
+                <p class="mb-0">Design by <a href="https://bootstrapious.com/admin-templates" class="external text-gray-400">Bootstrapious</a></p>
+                <!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
+              </div>
+            </div>
+          </div>
+        </footer>
+      
+      </div>
+    </div>
+    <!-- JavaScript files-->
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/popper.js/umd/popper.min.js"> </script>
+    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../vendor/jquery.cookie/jquery.cookie.js"> </script>
+    <script src="../vendor/chart.js/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+    <script src="../js/front.js"></script>
+  </body>
+</html>
+
+

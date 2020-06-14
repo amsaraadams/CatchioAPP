@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+    integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+    crossorigin=""
+  />
+  <script
+    src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+    integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+    crossorigin=""
+  ></script>
+
+    <title>Catchio application for AL police departement fuck you </title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <!-- Google fonts - Popppins for copy-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,800">
+    <!-- orion icons-->
+    <link rel="stylesheet" href="css/orionicons.css">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="css/custom.css">
+    <!-- Favicon-->
+    
+
+    <link rel="shortcut icon" href="img/favicon.png?3">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+        
+      </head>
+  <body>
+
+    <!-- navbar-->
+    <header class="header">
+      <nav class="navbar navbar-expand-lg px-4 py-2 bg-white shadow"><a href="#" class="sidebar-toggler text-gray-500 mr-4 mr-lg-5 lead"><i class="fas fa-align-left"></i></a><a href="#" class="navbar-brand font-weight-bold text-uppercase text-base">Catchio Dashboard</a>
+        <ul class="ml-auto d-flex align-items-center list-unstyled mb-0">
+          <li class="nav-item">
+            <form id="searchForm" class="ml-auto d-none d-lg-block">
+              <div class="form-group position-relative mb-0">
+                <button type="submit" style="top: -3px; left: 0;" class="position-absolute bg-white border-0 p-0"><i class="o-search-magnify-1 text-gray text-lg"></i></button>
+                <input type="search" placeholder="Search ..." class="form-control form-control-sm border-0 no-shadow pl-4">
+              </div>
+            </form>
+            <li class="nav-item dropdown ml-auto"><a id="userInfo" href="http://example.com" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><img src="img/avatar-6.jpg" alt="Jason Doe" style="max-width: 2.5rem;" class="img-fluid rounded-circle shadow"></a>
+            <div aria-labelledby="userInfo" class="dropdown-menu"><a href="#" class="dropdown-item"><strong class="d-block text-uppercase headings-font-family"><%=d['user_name']%></strong>
+              
+              <div class="dropdown-divider"></div><a href="../logout" class="dropdown-item">Logout</a>
+            </div>
+          </li>
+            
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="d-flex align-items-stretch">
+      <div id="sidebar" class="sidebar py-3">
+        <div class="text-gray-400 text-uppercase px-3 px-lg-4 py-4 font-weight-bold small headings-font-family">MAIN</div>
+        <ul class="sidebar-menu list-unstyled">
+              <li class="sidebar-list-item"><a href="/prediction" class="sidebar-link text-muted"><i class="o-sales-up-1 mr-3 text-gray"></i><span>Predictions</span></a></li>
+              <li class="sidebar-list-item"><a href="/maps" class="sidebar-link text-muted active"><i class="o-paperwork-1 mr-3 text-gray"></i><span>Maps</span></a></li>
+              <li class="sidebar-list-item"><a href="/charts" class="sidebar-link text-muted"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Charts</span></a></li>
+              <li class="sidebar-list-item"><a href="/reports" class="sidebar-link text-muted "><i class="o-table-content-1 mr-3 text-gray"></i><span>All Reports</span></a></li>
+              <li class="sidebar-list-item"><a href="/" class="sidebar-link text-muted"><i class="o-survey-1 mr-3 text-gray"></i><span>Add Report</span></a></li>
+        </ul>
+        
+      </div>
+
+
+<!--maps-->
+
+<style>#crimeMap { height: 600px; width: 1200px;}
+</style>
+<style>#crimeMapp { height: 600px; width: 1200px;}
+</style>
+
+<div class="card" style="width: 1000000px;"> 
+  <div class="card-header">
+    <h2 class="h6 text-uppercase mb-0">NUMBER OF CRIME IN LOS ANGELOS PER AREA</h2>
+  </div>
+ <div class="card-body" >
+    <div id="crimeMap"></div>
+ </div>
+</div>
+
+<p id='count' hidden><%=d['count']%></p>
+<p id='area' hidden><%=d['area']%></p>
+<p id='lat' hidden><%=d['lat']%></p>
+<p id='lon' hidden><%=d['lon']%></p>
+<script>
+
+var numbers=new Array();
+var lat=new Array();
+var lon=new Array();
+var ar=new Array();
+
+                num=document.getElementById('count').innerHTML.split(",");
+                latE=document.getElementById('lat').innerHTML.split(",");
+                lonE=document.getElementById('lon').innerHTML.split(",");
+                area=document.getElementById('area').innerHTML.split(",");
+                num.forEach(n=>numbers.push(Number(n)));
+                latE.forEach(n=>lat.push(n));
+                lonE.forEach(n=>lon.push(n));
+                area.forEach(n=>ar.push(n));
+
+
+  const mymap = L.map('crimeMap').setView([34.052235, -118.243683], 12);
+  const attribution ='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+  const tileUrl = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
+  const tiles = L.tileLayer(tileUrl, { attribution });
+  tiles.addTo(mymap);
+  for (i = 0; i < lat.length; i++) {
+    var circle = L.circle([lat[i], lon[i]], {
+    color: 'red',
+    fillColor: '#f03',
+    fillOpacity: 0.5,
+    radius: numbers[i]/50
+}).addTo(mymap);
+
+const marker = L.marker([lat[i], lon[i]]).addTo(mymap);
+marker.bindPopup("<h4>"+ar[i]+" : "+numbers[i]+"</h4>").openPopup();
+}
+
+
+</script>
+
+<!--maps-->
+
+
+      <footer class="footer bg-white shadow align-self-end py-3 px-xl-5 w-100">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-6 text-center text-md-left text-primary">
+              <p class="mb-2 mb-md-0">Ayoub Bouz and Taoufiq Hafsa  &copy; 2019-2020</p>
+            </div>
+          </div>
+        </div>
+      </footer>
+  <!-- JavaScript files-->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/popper.js/umd/popper.min.js"> </script>
+  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+  <script src="vendor/jquery.cookie/jquery.cookie.js"> </script>
+  <script src="vendor/chart.js/Chart.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+  <script src="js/front.js"></script>
+  <script src="chart.js"></script>
+
+  
+</body>
+</html>
